@@ -15,11 +15,8 @@ mongoose.connect(process.env.MONGODB_URI || "mongodb://root:root@localhost:27017
 require("./src/api/v1/models/users.model");
 
 //Routes
-const users = require("./src/api/v1/routes");
-app.use("/users", users);
-
-// //Middlewares
-// const authMiddleware = require("./src/api/v1/middlewares/authMiddleware");
-// app.use(authMiddleware);
+const { usersRouter, authRouter } = require("./src/api/v1/routes");
+app.use("/users", usersRouter);
+app.use("/", authRouter);
 
 module.exports = app;
